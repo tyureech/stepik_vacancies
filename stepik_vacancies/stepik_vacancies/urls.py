@@ -20,7 +20,7 @@ from vacancies import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.MainView.as_view(), name='home'),
-    path('vacancies/', views.VacanciesFull.as_view(), name='vacancies'),
+    path('vacancies/', views.VacanciesAll.as_view(), name='vacancies'),
     path('vacancies/<int:id>/', views.Vacancy.as_view(), name='vacancy'),
     path('vacancies/cat/<str:direction>/', views.VacanciesDirection.as_view(), name='vacancies_direction'),
     path('companies/<int:id>', views.Company.as_view(), name='company')
