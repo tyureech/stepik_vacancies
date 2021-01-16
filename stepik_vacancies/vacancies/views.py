@@ -1,3 +1,6 @@
+from html.parser import HTMLParser
+from bs4 import BeautifulSoup
+
 from django.shortcuts import render
 from django.views import View
 
@@ -38,11 +41,41 @@ class Vacancy(View):
     def get(self, request, id):
 
         vacancy = models.Vacancy.objects.get(id=id)
-        list_tetx = vacancy.description.split()
-        print(list_tetx)
+        parser = BeautifulSoup(vacancy.description, 'lxml')
+        list_tetx = vacancy.description.split('<')
+        text = parser.prettify().split('\n')
+        text_2 = []
+        for i in text:
+            text_2.append(i.strip())
+        dict_start_finish = {
+            'start': '',
+            'finish': ''
+        }
+        dict_tag = {
 
+        }
+        key = text_2.pop(0)
+        k = []
+        for i in text_2:
+
+            if i != '<b>' and key == '<p>':
+                if dict_start_finish['start'] == '':
+                    dict_start_finish['start'] = i
+                elif dict_start_finish['finish'] == '':
+                    dict_start_finish['finish'] = i
+
+            elif key == '<b>':
+                key_b = i
+                dict_tag[key_b] = []
+            elif key == '<li>':
+                dict_tag[key_b].append(i)
+            key = i
+
+        print(text_2)
         context = {
             'vacancy': vacancy,
+            'parser': dict_tag,
+            'start_finish': dict_start_finish
         }
 
         return render(request, 'vacancy.html', context=context)
