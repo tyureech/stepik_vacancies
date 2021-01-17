@@ -8,12 +8,14 @@ class Company(models.Model):
     logo = models.URLField(default='https://place-hold.it/100x60')
     description = models.TextField()
     employee_count = models.IntegerField()
+    nums_vacancies = models.IntegerField(null=True)
 
 
 class Specialty(models.Model):
     code = models.CharField(max_length=20)
     title = models.CharField(max_length=20)
     picture = models.URLField(default='https://place-hold.it/100x60')
+    nums_vacancies = models.IntegerField(null=True)
 
 
 class Vacancy(models.Model):

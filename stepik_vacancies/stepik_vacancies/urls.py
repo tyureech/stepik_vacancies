@@ -25,3 +25,6 @@ urlpatterns = [
     path('vacancies/cat/<str:direction>/', views.VacanciesDirection.as_view(), name='vacancies_direction'),
     path('companies/<int:id>', views.Company.as_view(), name='company')
 ]
+
+handler404 = views.custom_handler404
+handler500 = views.custom_handler500

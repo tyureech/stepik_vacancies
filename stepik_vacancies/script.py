@@ -12,7 +12,7 @@ from vacancies import data
 if __name__ == '__main__':
 
     test = models.Vacancy.objects.all().exists()
-    if test == False:
+    if test is False:
         for specialty in data.specialties:
             specialties = models.Specialty.objects.create(
                 code=specialty['code'],
@@ -30,7 +30,7 @@ if __name__ == '__main__':
                 title=job['title'],
                 specialty=models.Specialty.objects.get(code=job['specialty']),
                 company=models.Company.objects.get(id=job['company']),
-                skills =job['skills'],
+                skills=job['skills'],
                 description=job['description'],
                 salary_min=job['salary_from'],
                 salary_max=job['salary_to'],
