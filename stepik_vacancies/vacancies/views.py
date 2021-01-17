@@ -123,7 +123,7 @@ class Company(View):
 
     def get(self, request, id):
 
-        company = models.Company.objects.get(name="workiro"),
+        company = models.Company.objects.get(id=id),
         vacancies = models.Vacancy.objects.filter(company=id)
         numbers_vacancies = len(vacancies)
 
