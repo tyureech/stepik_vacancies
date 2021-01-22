@@ -31,9 +31,11 @@
         {% for specialty in specialties %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-4 text-center mb-4">
+            {% if specialty.picture %}
             <img class="mx-auto d-block" src="{{ specialty.picture }}" width="80" height="80" alt="">
+            {% endif %}
             <div class="card-body">
-              <p class="card-text mb-2">{{ specialty.title }}</p>
+              <p class="card-text mb-2">{{ specialty.title }}{{ specialty.picture.specty_backend.url }}</p>
               <p class="card-text"><a href="{% url 'vacancies_direction' specialty.code %}">{{ specialty.nums_vacancies }} вакансий</a></p>
             </div>
           </div>

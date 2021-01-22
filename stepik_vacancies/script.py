@@ -9,6 +9,7 @@ from vacancies import models
 from vacancies import data
 
 
+
 if __name__ == '__main__':
 
     test = models.Vacancy.objects.all().exists()
@@ -23,7 +24,7 @@ if __name__ == '__main__':
                 name=company['title'],
                 location=company['location'],
                 description=company['description'],
-                employee_count=company['employee_count']
+                employee_count=company['employee_count'],
             )
         for job in data.jobs:
             vacancy = models.Vacancy.objects.create(

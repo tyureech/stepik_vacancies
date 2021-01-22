@@ -3,7 +3,10 @@ from django.views import View
 from django.http import HttpResponseNotFound, HttpResponseServerError
 from bs4 import BeautifulSoup
 
-from . import models
+from django.contrib.auth import forms
+from django.views.generic import CreateView
+
+from . import models, form
 
 
 def custom_handler404(request, exception):
@@ -17,6 +20,7 @@ def custom_handler500(request):
 class MainView(View):
 
     def get(self, request):
+        print(request.POST)
         specialties = models.Specialty.objects.all()
         companies = models.Company.objects.all()
         vacancies = models.Vacancy.objects.all()
@@ -25,13 +29,14 @@ class MainView(View):
             nums = len(vacancies.filter(specialty__code=specialty.code))
             specialty.nums_vacancies = nums
             specialty.save()
-            print(specialty.nums_vacancies)
+            # print(specialty.nums_vacancies)
+        print(specialty.picture)
 
         for company in companies:
             nums = len(vacancies.filter(company__id=company.id))
             company.nums_vacancies = nums
             company.save()
-            print(company.nums_vacancies)
+            # print(company.nums_vacancies)
 
         context = {
             'specialties': models.Specialty.objects.all(),
@@ -39,6 +44,10 @@ class MainView(View):
         }
 
         return render(request, 'index.html', context=context)
+
+    def post(self, request):
+        print(request.POST)
+
 
 
 class VacanciesAll(View):
@@ -134,3 +143,24 @@ class Company(View):
         }
 
         return render(request, 'company.html', context=context)
+
+
+class Login(View):
+
+    def get(self, request):
+        return render(request, 'login.html', {'form': form.LoginForm})
+
+
+class Register(View):
+
+    def get(self, request):
+        return render(request, 'register.html', {'form': form.RegisterForm})
+
+    def post(self, request):
+        post = request.POST
+        reg = models.RegisterModel(login=post['login'], name=post['name'], surname=post['surname'], password=post['password'])
+        reg.save()
+        print(reg, post)
+
+        return render(request, 'register.html', {'form': form.RegisterForm})
+

@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
 from vacancies import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,8 +26,15 @@ urlpatterns = [
     path('vacancies/', views.VacanciesAll.as_view(), name='vacancies'),
     path('vacancies/<int:id>/', views.Vacancy.as_view(), name='vacancy'),
     path('vacancies/cat/<str:direction>/', views.VacanciesDirection.as_view(), name='vacancies_direction'),
-    path('companies/<int:id>', views.Company.as_view(), name='company')
+    path('companies/<int:id>', views.Company.as_view(), name='company'),
+    path('login/', views.Login.as_view(), name='login'),
+    path('register/', views.Register.as_view(), name='register'),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 handler404 = views.custom_handler404
 handler500 = views.custom_handler500
