@@ -3,10 +3,7 @@ from django.views import View
 from django.http import HttpResponseNotFound, HttpResponseServerError
 from bs4 import BeautifulSoup
 
-from django.contrib.auth import forms
-from django.views.generic import CreateView
-
-from . import models, form
+from . import models
 
 
 def custom_handler404(request, exception):
@@ -143,24 +140,3 @@ class Company(View):
         }
 
         return render(request, 'company.html', context=context)
-
-
-class Login(View):
-
-    def get(self, request):
-        return render(request, 'login.html', {'form': form.LoginForm})
-
-
-class Register(View):
-
-    def get(self, request):
-        return render(request, 'register.html', {'form': form.RegisterForm})
-
-    def post(self, request):
-        post = request.POST
-        reg = models.RegisterModel(login=post['login'], name=post['name'], surname=post['surname'], password=post['password'])
-        reg.save()
-        print(reg, post)
-
-        return render(request, 'register.html', {'form': form.RegisterForm})
-

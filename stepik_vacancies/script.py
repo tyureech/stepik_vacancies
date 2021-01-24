@@ -7,6 +7,7 @@ django.setup()
 
 from vacancies import models
 from vacancies import data
+from authentication.models import RegisterModel
 
 
 
@@ -37,3 +38,4 @@ if __name__ == '__main__':
                 salary_max=job['salary_to'],
                 published_at=job['posted'],
             )
+    RegisterModel.objects.all().delete()

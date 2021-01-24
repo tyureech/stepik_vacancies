@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'shell_plus',
     'crispy_forms',
     'vacancies',
+    'authentication',
+
 ]
 
 MIDDLEWARE = [

@@ -4,8 +4,8 @@ from .models import RegisterModel
 
 class LoginForm(forms.Form):
 
-    login = forms.CharField(min_length=6, max_length=20, label='Логин')
-    password = forms.CharField(min_length=6, label='Пароль')
+    login = forms.CharField(label='Логин')
+    password = forms.CharField(label='Пароль')
 
 
 # class RegisterForm(forms.Form):
@@ -17,7 +17,6 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(forms.ModelForm):
-    print(123)
 
     class Meta:
         model = RegisterModel
