@@ -27,8 +27,9 @@ urlpatterns = [
     path('vacancies/<int:id>/', views.Vacancy.as_view(), name='vacancy'),
     path('vacancies/cat/<str:direction>/', views.VacanciesDirection.as_view(), name='vacancies_direction'),
     path('companies/<int:id>', views.Company.as_view(), name='company'),
+    path('vacancies/<int:id>/send', views.SendVacancy.as_view(), name='send'),
     path('', include('authentication.urls')),
-
+    path('', include('my_company.urls')),
 ]
 
 if settings.DEBUG:

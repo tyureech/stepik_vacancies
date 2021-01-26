@@ -140,3 +140,9 @@ class Company(View):
         }
 
         return render(request, 'company.html', context=context)
+
+
+class SendVacancy(View):
+
+    def get(self, request, id):
+        return render(request, 'sent.html', {})

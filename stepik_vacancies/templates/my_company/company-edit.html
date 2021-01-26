@@ -1,0 +1,76 @@
+{% extends 'my_company/base_profile.html' %}
+{% block content %}
+{% csrf_token %}
+<main class="container mt-3 pb-5">
+    <div class="row mt-5">
+      <div class="col-12 col-lg-4">
+        <aside class="pt-3 pb-4 px-4 mb-5 card">
+          <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+          <div class="nav flex-column nav-pills">
+            <a class="nav-link active" href="{% url 'home' %}">1. Информация о&nbsp;компании</a>
+            <a class="nav-link" href="#">2. Вакансии</a>
+          </div>
+        </aside>
+      </div>
+      <div class="col-12 col-lg-8">
+        <div class="card">
+          <div class="card-body px-4 pb-4">
+            <!-- Tab -->
+                    <section class="tab-pane fade show active">
+                      <h2 class="h4 pt-2 pb-3">Информация о компании</h2>
+                        <form action="#" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                {% for key, value in model.items %}
+                                {% if key != 'Логотип' and key != 'Информация о компании'%}
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group pb-2">
+                                        <label class="mb-2 text-dark" for="companyName">{{ key }}</label>
+                                        <input class="form-control" type="text" name='{{ key }}' value="{{ value }}" id="companyName">
+                                    </div>
+                                </div>
+                                {% elif key == 'Логотип' %}
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2 text-dark" >Логотип</label>
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                                <img src="https://place-hold.it/120x40" alt="" style="max-width: 120px;height: auto;">
+                                            </div>
+                                            <div class="col-6" style="position: relative;">
+                                                <div class="input-group-prepend" style="position: absolute; top: 0;right: 15px;">
+                                                    <span class="btn btn-info px-4">Загрузить</span>
+                                                </div>
+                                                <div class="custom-file" style="">
+                                                    <input type="file" class="custom-file-input" name="{{ key }}" id="inputGroupFile01">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% elif key == 'Информация о компании' %}
+                                <div class="form-group col-12 ">
+                                    <label class="mb-12 text-dark" for="companyInfo">{{ key }}</label>
+                                    <textarea class="form-control" rows="4" name="{{ key }}" id="companyInfo" style="color:#000;">{{ value }}</textarea>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% if info %}
+                                <p class="alert alert-info col-12" role="alert">
+                                    {{ info }}
+                                </p>
+                                {% else %}
+                                <div class="form-group col-12">
+                                    <input type="submit" class="btn btn-info" value="Сохранить">
+                                </div>
+                                {% endif %}
+                        </form>
+                    </section>
+            <!-- END Tab -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

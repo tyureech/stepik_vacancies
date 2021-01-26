@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 class Company(models.Model):
 
-    name = models.CharField(max_length=30)
-    location = models.CharField(max_length=20)
-    logo = models.ImageField(upload_to='MEDIA_COMPANY_IMAGE_DIR')
+    name = models.CharField(verbose_name='Название компании', max_length=30)
+    location = models.CharField('География', max_length=20)
+    logo = models.ImageField('Логотип', upload_to='MEDIA_COMPANY_IMAGE_DIR')
     description = models.TextField()
     employee_count = models.IntegerField()
     owner = models.ManyToManyField(User, related_name="User")

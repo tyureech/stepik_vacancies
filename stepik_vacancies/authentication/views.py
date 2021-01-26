@@ -14,13 +14,14 @@ class Login(View):
         print(post)
         auth = models.RegisterModel.objects.filter(name=post['login'], password=post['password']).exists()
         if auth is True:
-            return redirect('home')
+            return redirect('my_company', post['login'])
         return render(request, 'authentication/login.html', {'form': form.LoginForm})
 
 
 class Register(View):
 
     def get(self, request):
+        print(form.RegisterForm)
         return render(request, 'authentication/register.html', {'form': form.RegisterForm})
 
     def post(self, request):
