@@ -26,7 +26,13 @@ if __name__ == '__main__':
                 location=company['location'],
                 description=company['description'],
                 employee_count=company['employee_count'],
+                owner=RegisterModel.objects.create(login=company['title'],
+                                                   name=company['title'],
+                                                   surname=company['title'],
+                                                   password=company['title'],
+                                                   )
             )
+            print(company['title'])
         for job in data.jobs:
             vacancy = models.Vacancy.objects.create(
                 title=job['title'],
@@ -38,4 +44,4 @@ if __name__ == '__main__':
                 salary_max=job['salary_to'],
                 published_at=job['posted'],
             )
-    RegisterModel.objects.all().delete()
+    # RegisterModel.objects.all().delete()

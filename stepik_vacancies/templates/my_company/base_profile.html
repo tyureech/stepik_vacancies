@@ -31,13 +31,13 @@
           <li class="nav-item active">
             <div class="btn-group">
               <button type="button" class="btn dropdown-toggle font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Иван Топорыжкин
+               {{ user.login }} {{ user.surname }}
               </button>
               <div class="dropdown-menu dropdown-menu-right mt-3">
                 <a href="#" class="dropdown-item py-2">Профиль</a>
                 <a href="#" class="dropdown-item py-2">Резюме</a>
                 <a href="#" class="dropdown-item py-2">Компания</a>
-                <a href="#" class="dropdown-item py-2">Выйти</a>
+                <a href="{% url 'logout' %}" class="dropdown-item py-2">Выйти</a>
               </div>
             </div>
           </li>
@@ -45,7 +45,28 @@
       </div>
     </nav>
   </header>
-  {% block content %}{% endblock %}
+  <main class="container mt-3 pb-5">
+    <div class="row mt-5">
+      <div class="col-12 col-lg-4">
+        <aside class="pt-3 pb-4 px-4 mb-5 card">
+          <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+          <div class="nav flex-column nav-pills">
+            <a class="nav-link {{ active_company }}" href="{% url 'my_company' %}">1. Информация о&nbsp;компании</a>
+            <a class="nav-link {{ active_vacancy }}" href="{% url 'my_vacancies' %}">2. Вакансии</a>
+          </div>
+        </aside>
+      </div>
+      <div class="col-12 col-lg-8">
+        <div class="card">
+          <div class="card-body px-4 pb-4">
+
+            {% block content %}{% endblock %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

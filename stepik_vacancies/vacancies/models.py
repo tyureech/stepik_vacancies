@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from authentication.models import RegisterModel
+
+
 
 class Company(models.Model):
 
@@ -9,7 +12,7 @@ class Company(models.Model):
     logo = models.ImageField('Логотип', upload_to='MEDIA_COMPANY_IMAGE_DIR')
     description = models.TextField()
     employee_count = models.IntegerField()
-    owner = models.ManyToManyField(User, related_name="User")
+    owner = models.ForeignKey(RegisterModel, on_delete=models.CASCADE, related_name="user", blank=True, null=True)
     nums_vacancies = models.IntegerField(null=True)
 
 
